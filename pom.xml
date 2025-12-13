@@ -12,8 +12,8 @@
         <javafx.version>21.0.1</javafx.version>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- platform classifier will be auto-detected at build time -->
-        <javafx.platform>${os.detected.classifier}</javafx.platform>
+        <!-- default to Windows classifier unless a profile overrides it -->
+        <javafx.platform>win</javafx.platform>
     </properties>
 
     <dependencies>
@@ -50,19 +50,7 @@
                     <mainClass>com.mayin_tarlasi.Main</mainClass>
                 </configuration>
             </plugin>
-            <!-- Plugin to detect current OS so JavaFX platform classifier can be set -->
-            <plugin>
-                <groupId>kr.motd.maven</groupId>
-                <artifactId>os-maven-plugin</artifactId>
-                <version>1.7.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>detect</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -82,5 +70,41 @@
             </plugin>
         </plugins>
     </build>
+
+        <profiles>
+            <profile>
+                <id>windows</id>
+                <activation>
+                    <os>
+                        <family>Windows</family>
+                    </os>
+                </activation>
+                <properties>
+                    <javafx.platform>win</javafx.platform>
+                </properties>
+            </profile>
+            <profile>
+                <id>linux</id>
+                <activation>
+                    <os>
+                        <family>unix</family>
+                    </os>
+                </activation>
+                <properties>
+                    <javafx.platform>linux</javafx.platform>
+                </properties>
+            </profile>
+            <profile>
+                <id>mac</id>
+                <activation>
+                    <os>
+                        <family>mac</family>
+                    </os>
+                </activation>
+                <properties>
+                    <javafx.platform>mac</javafx.platform>
+                </properties>
+            </profile>
+        </profiles>
 
 </project>
