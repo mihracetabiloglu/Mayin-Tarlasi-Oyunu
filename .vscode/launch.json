@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run via Maven: javafx:run",
+      "type": "java",
+      "request": "launch",
+      "mainClass": "com.mayin_tarlasi.Main",
+      "preLaunchTask": "maven: javafx:run",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}

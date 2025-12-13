@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "maven: javafx:run",
+      "type": "process",
+      "command": "${workspaceFolder}\\mvnw.cmd",
+      "args": ["javafx:run"],
+      "presentation": {
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "maven: clean compile",
+      "type": "process",
+      "command": "${workspaceFolder}\\mvnw.cmd",
+      "args": ["clean", "compile"],
+      "presentation": { "panel": "new" },
+      "problemMatcher": []
+    }
+  ]
+}
