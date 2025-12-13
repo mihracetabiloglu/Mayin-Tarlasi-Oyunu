@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane fx:controller="com.mayin_tarlasi.Controller"
+
+            xmlns:fx="http://javafx.com/fxml">
+
+    <top>
+        <MenuBar>
+            <Menu text="Oyun">
+                <MenuItem fx:id="yeniOyun" text="Yeni Oyun"/>
+                <MenuItem fx:id="cikis" text="Çıkış"/>
+            </Menu>
+
+            <Menu text="Seviye Seç">
+                <MenuItem fx:id="kolay" text="Kolay"/>
+                <MenuItem fx:id="orta" text="Orta"/>
+                <MenuItem fx:id="zor" text="Zor"/>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <center>
+        <GridPane fx:id="grid" hgap="2" vgap="2" />
+    </center>
+
+</BorderPane>
