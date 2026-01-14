@@ -1,7 +1,9 @@
 package com.mayin_tarlasi;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
+
 public class Controller {
 @FXML private GridPane grid;
     @FXML private MenuItem kolay, orta, zor;
@@ -20,13 +22,14 @@ public class Controller {
 
         yeniOyun.setOnAction(e -> oyunuBaslat(zorluk));
         cikis.setOnAction(e -> System.exit(0));
+        
 
         oyunuBaslat(zorluk);
 }
 private void oyunuBaslat(DifficultyLevel level){
         this.zorluk = level;
         board = new GameBoard(level);
-
+        SoundPlayer.stopMineMusic();
         grid.getChildren().clear();
         grid.setGridLinesVisible(true);
 
@@ -40,18 +43,19 @@ private void oyunuBaslat(DifficultyLevel level){
                 CellButton btn = new CellButton(r,c);
                 buttons[r][c] = btn;
 
-                btn.setOnMouseClicked(e -> {
-                    if(board.isGameOver || board.checkWin()) return;
+              btn.setOnMousePressed(e -> {
+    if (board.isGameOver || board.checkWin()) return;
 
-                    if(e.isPrimaryButtonDown()){
-                        board.OpenSquaze(btn.getRow(), btn.getCol());
-                    } else if(e.isSecondaryButtonDown()){
-                        board.toggleFlag(btn.getRow(), btn.getCol());
-                    }
+    if (e.getButton() == MouseButton.PRIMARY) {
+        board.OpenSquaze(btn.getRow(), btn.getCol());
+    } 
+    else if (e.getButton() == MouseButton.SECONDARY) {
+        board.toggleFlag(btn.getRow(), btn.getCol());
+    }
 
-                    updateUI();
-                    checkStatus();
-                });
+    updateUI();
+    checkStatus();
+});
 
                 grid.add(btn, c, r);
             }
@@ -69,13 +73,21 @@ private void oyunuBaslat(DifficultyLevel level){
             }
         }
     }
-
- private void checkStatus() {
+private void lockBoard() {
+    for (CellButton[] row : buttons) {
+        for (CellButton btn : row) {
+            btn.setDisable(true);
+        }
+    }
+}
+private void checkStatus() {
     if (board.isGameOver) {
-        SoundPlayer.play("explosion.mp3");
-        Dialogs.show("Kaybettin", "BOOM! Mayına bastın!");
-    } else if (board.checkWin()) {
-        Dialogs.show("Kazandın","Tüm mayınları buldun!");
+        SoundPlayer.playMineMusic(); 
+        lockBoard();              // grid kilitlenir
+        Dialogs.gameOver();       // tablo çıkar
+    } 
+    else if (board.checkWin()) {
+        Dialogs.show("OYUNU KAZANDIN", "Tebrikler! Tüm mayınları buldun.");
     }
 }
 }

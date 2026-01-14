@@ -88,10 +88,12 @@ public void OpenSquaze(int rows,int cols){
        return ; 
     }
   chosenSquare.OpenCell();
-  if(chosenSquare.isMine()){
-    System.out.println("Mayina basildi oyun bitti");
+ if (chosenSquare.isMine()) {
+    isGameOver = true;        // OYUN BİTTİ
+    chosenSquare.OpenCell(); 
+    revealMines();    // mayını göster
     return;
-  }
+}
   // Eğer '0' ise Domino Etkisini başlat
   if(chosenSquare.getAdjacentMineCount()==0){
     OpenNeighboringBlocks(rows,cols);
@@ -122,34 +124,14 @@ for(int dr=-1; dr<=1 ; dr++){
      // RECURSION (Özyineleme):
      // Eğer bu komşu da '0' ise, metodu KENDİSİ için tekrar çağır.
       if(neighborSquare.getAdjacentMineCount()==0){
-        OpenNeighboringBlocks(rows, cols);
+        OpenNeighboringBlocks(nr, nc);
       }
       }
       }
     }
   }
 }
-public void printBoard() {
-        System.out.print("  ");
-        for (int i = 0; i < numCols; i++) System.out.print(i + " ");
-        System.out.println();
-        
-        for (int i = 0; i < numRows; i++) {
-            System.out.print(i + " ");
-            for (int j = 0; j < numCols; j++) {
-                if(grid[i][j].isOpened()){
-                    if(grid[i][j].isMine()) System.out.print("* ");
-                    else System.out.print(grid[i][j].getAdjacentMineCount() + " ");
-                } else if (grid[i][j].isFlagged()){
-                    System.out.print("F ");
-                } else {
-                    System.out.print("- ");
-                }
-            }
-            System.out.println();
-        }
-    }
-    
+
 public boolean checkWin() {
     for (int i = 0; i < this.numRows; i++) {
         for (int j = 0; j < this.numCols; j++) {
@@ -173,7 +155,7 @@ public void revealMines() {
         }
     }
 }
-// GameBoard.java içine:
+
 public Cell getCell(int r, int c) {
     return this.grid[r][c];
 }

@@ -11,6 +11,12 @@ public class Dialogs {
         alert.setContentText(msg);
         alert.showAndWait();
     }
+ public static void gameOver(){
+  Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Oyun Bitti");
+    alert.setHeaderText("💣 BOOM!");
+    alert.setContentText("Mayına bastın.\nYeniden deneyin.");
+
+    alert.showAndWait(); 
 }
-
-
+}

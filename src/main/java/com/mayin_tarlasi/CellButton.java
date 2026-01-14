@@ -56,7 +56,7 @@ public class CellButton extends Button {
         // --- KAPALI VE BAYRAKSIZ HÜCRE ---
         setDisable(false);
         setText("");
-        setStyle("-fx-background-color: lightgray; -fx-opacity: 1;");
+        setStyle("-fx-background-color: rgb(248,167,214); -fx-opacity: 1; -fx-border-color: white;");
     }
 
     public int getRow() {

@@ -5,14 +5,34 @@ import javafx.scene.media.MediaPlayer;
 
 public class SoundPlayer {
 
-    public static void play(String fileName) {
+    private static MediaPlayer minePlayer;
+
+    public static void playMineMusic() {
         try {
-            String path = SoundPlayer.class.getResource("/sounds/" + fileName).toString();
-            Media media = new Media(path);
-            MediaPlayer player = new MediaPlayer(media);
-            player.play();
+            if (minePlayer != null) {
+                minePlayer.stop();
+            }
+
+            Media media = new Media(
+                SoundPlayer.class
+                    .getResource("/sounds/mayin_tarlasi.wav")
+
+                    .toExternalForm()
+            );
+
+            minePlayer = new MediaPlayer(media);
+            minePlayer.setVolume(0.7);
+            minePlayer.play();
+
         } catch (Exception e) {
-            System.out.println("Ses çalınamadı: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static void stopMineMusic() {
+        if (minePlayer != null) {
+            minePlayer.stop();
         }
     }
 }
+    
