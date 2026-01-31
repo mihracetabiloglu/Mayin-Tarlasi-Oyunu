@@ -12,7 +12,6 @@
         <javafx.version>21.0.1</javafx.version>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- default to Windows classifier unless a profile overrides it -->
         <javafx.platform>win</javafx.platform>
     </properties>
 

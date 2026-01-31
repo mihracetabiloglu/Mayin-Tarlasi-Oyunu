@@ -20,7 +20,7 @@ public class Main extends Application {
             Scene scene = new Scene(root);
             
             // 3. Pencere Ayarları
-            stage.setTitle("Mayın Tarlası - Mihrace"); // Başlık
+            stage.setTitle("Mayın Tarlası "); // Başlık
             stage.setScene(scene);
             stage.setResizable(false); // Pencere boyutuyla oynanmasın (Tasarım bozulmasın)
             stage.show();
@@ -35,5 +35,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+        System.out.println("Sıla balam boş yapıyor");
     }
 }
